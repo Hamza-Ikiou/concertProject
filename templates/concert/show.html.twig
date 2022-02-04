@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page détaillée d'un concert{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="example-wrapper">
+        <h1> Le concert du groupe {{ detailsConcert.getBand().getName() }}</h1>
+        <br>
+        <div class="container">
+            <div class="card-group">
+                {% if detailsConcert.getPictures().getUrl is defined %}
+                    <div class="card">
+                        <img class="card-img-top" src="{{ detailsConcert.getPictures().getUrl() }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Photo du concert du groupe <a href="../band/{{ detailsConcert.getBand().getId() }}">{{ detailsConcert.getBand().getName() }}</a></h5>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="card">
+                        <img class="card-img-top" src="">
+                        <div class="card-body">
+                            <h5 class="card-title">Aucune image disponible pour le groupe <a href="../band/{{ detailsConcert.getBand().getId() }}">{{ detailsConcert.getBand().getName() }}</a></h5>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <br>
+            <div class="card-group">
+                <div class="card">
+                    <img class="card-img-top" src="{{ detailsConcert.getRoom().getPictures().getUrl() }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Photo de la salle de concert du {{ detailsConcert.getRoom().getName() }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block footer %}
+        Adresse du concert : {{ detailsConcert.getRoom().getAddress() }}
+    {% endblock %}
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page détaillée d'un groupe{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="example-wrapper">
+        <h1> Le groupe {{ detailsBand.getName() }}</h1>
+        <p>Composé de {{ detailsBand.getMembers()|length }} membres, qui sont :</p>
+        <br>
+        <div class="container">
+            <div class="card-group">
+                {% for member in detailsBand.getMembers() %}
+                    {% if member.getPictures().getUrl is defined%}
+                        <div class="card">
+                            <img class="card-img-top" src="{{ member.getPictures().getUrl() }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ member.getFirstName() }}</h5>
+                                <p class="card-text">Né le {{ member.getDateOfBirth().format('d-m-Y') }}.</p>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="card">
+                            <img class="card-img-top" src="https://webinfo.iutmontp.univ-montp2.fr/~ikiouh/concertProject/public/images/noProfilePic.png" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ member.getFirstName() }}</h5>
+                                <p class="card-text">Né le {{ member.getDateOfBirth().format('d-m-Y') }}.</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <br>
+            <h1> Leurs prochains concerts :</h1>
+            <br>
+            <div class="card-group">
+                {% if detailsBand.getConcertsIncoming() is empty%}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Aucun concert de prévu pour le groupe {{ detailsBand.getName() }}</h5>
+                        </div>
+                    </div>
+                {% else %}
+                    {% for concert in detailsBand.getConcertsIncoming() %}
+                        <div class="card">
+                            <img class="card-img-top" src="{{ concert.getPictures().getUrl() }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ concert.getName() }}</h5>
+                                <p class="card-text">Se déroulera le :  {{ concert.getDate().format('d-m-Y') }}.</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

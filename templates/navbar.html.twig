@@ -1,0 +1,32 @@
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="https://webinfo.iutmontp.univ-montp2.fr/~ikiouh/concertProject/public/concerts">Home</a>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://webinfo.iutmontp.univ-montp2.fr/~ikiouh/concertProject/public/concerts/archive">Archives</a>
+                </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="https://webinfo.iutmontp.univ-montp2.fr/~ikiouh/concertProject/public/concerts/admin">Concerts</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="https://webinfo.iutmontp.univ-montp2.fr/~ikiouh/concertProject/public/bands">Groupes</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="https://webinfo.iutmontp.univ-montp2.fr/~ikiouh/concertProject/public/artists">Membres</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% if app.user %}
+            <a>Bonjour {{ app.user.firstName }}</a>
+            <a class="nav-link" href="https://webinfo.iutmontp.univ-montp2.fr/~ikiouh/concertProject/public/user/{{ app.user.id }}">Voir profil</a>
+            <a class="nav-link" href="https://webinfo.iutmontp.univ-montp2.fr/~ikiouh/concertProject/public/logout">Se déconnecter</a>
+        {% else %}
+            <a class="nav-link" href="https://webinfo.iutmontp.univ-montp2.fr/~ikiouh/concertProject/public/register">S'inscrire</a>
+            <a class="nav-link" href="https://webinfo.iutmontp.univ-montp2.fr/~ikiouh/concertProject/public/login">Se connecter</a>
+        {% endif %}
+    </nav>
+{% endblock navbar %}

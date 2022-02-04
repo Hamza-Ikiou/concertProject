@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page des concerts{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="example-wrapper">
+        <h1>Liste des concerts : </h1>
+        <br>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Groupe</th>
+                    <th scope="col">Tournée</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for concert in listConcertWithCreate %}
+                    <tr>
+                        <td><a href="{{ path('band_show', {id: concert.getBand().getId()}) }}">{{ concert.getBand().getName() }}</a></td>
+                        <td><a href="{{ path('concert_show', {id: concert.getId()}) }}">{{ concert.getName() }}</a></td>
+                        <td>{{ concert.getDate().format('d/m/Y') }}</td>
+                        <td>{{ concert.getPrice() }}€</td>
+                        <td>
+                            <a class="btn btn-warning" href="{{ path('concert_edit', {id: concert.getId()}) }}">Modifier</a>
+                            <a class="btn btn-danger" href="{{ path('concert_delete', {id: concert.getId()}) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div>
+            <a class="btn btn-primary" href="{{ path('concert_create') }}">Créer un nouveau concert</a>
+        </div>
+    </div>
+{% endblock %}
