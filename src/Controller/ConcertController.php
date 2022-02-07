@@ -35,7 +35,7 @@ class ConcertController extends AbstractController
      * @param Request $request
      * @return Response
      * @Route("/concerts/create", name="concert_create")
-     * @isGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function createConcert(ManagerRegistry $doctrine, Request $request): Response
     {
@@ -65,7 +65,7 @@ class ConcertController extends AbstractController
      * @param Concert $concert
      * @return Response
      * @Route("/concerts/delete/{id}", name="concert_delete")
-     * @isGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function deleteConcert(ManagerRegistry $doctrine, Request $request, Concert $concert): Response
     {
@@ -84,7 +84,7 @@ class ConcertController extends AbstractController
      * @param Concert $concert
      * @return Response
      * @Route("/concerts/edit/{id}", name="concert_edit")
-     * @isGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function editConcert(ManagerRegistry $doctrine, Request $request, Concert $concert): Response
     {
@@ -124,6 +124,7 @@ class ConcertController extends AbstractController
      * @param ManagerRegistry $doctrine
      * @return Response
      * @Route("/concerts/admin", name="concerts_list_creation")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function listCreation(ManagerRegistry $doctrine): Response
     {

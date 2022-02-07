@@ -19,6 +19,7 @@ class ArtistController extends AbstractController
      * @param ManagerRegistry $doctrine
      * @return Response
      * @Route("/artists", name="artist_list")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function list(ManagerRegistry $doctrine): Response
     {
@@ -33,7 +34,7 @@ class ArtistController extends AbstractController
      * @param Request $request
      * @return Response
      * @Route("/artists/create", name="artist_create")
-     * @isGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function createArtist(ManagerRegistry $doctrine, Request $request): Response
     {
@@ -63,7 +64,7 @@ class ArtistController extends AbstractController
      * @param Artist $artist
      * @return Response
      * @Route("/artists/delete/{id}", name="artist_delete")
-     * @isGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function deleteArtist(ManagerRegistry $doctrine, Request $request, Artist $artist): Response
     {
@@ -82,7 +83,7 @@ class ArtistController extends AbstractController
      * @param Artist $artist
      * @return Response
      * @Route("/artist/edit/{id}", name="artist_edit")
-     * @isGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function editArtist(ManagerRegistry $doctrine, Request $request, Artist $artist): Response
     {

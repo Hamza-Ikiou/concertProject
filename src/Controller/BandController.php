@@ -33,6 +33,7 @@ class BandController extends AbstractController
      * @param ManagerRegistry $doctrine
      * @return Response
      * @Route("/bands", name="bands_list")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function list(ManagerRegistry $doctrine): Response
     {
@@ -47,7 +48,7 @@ class BandController extends AbstractController
      * @param Request $request
      * @return Response
      * @Route("/bands/create", name="band_create")
-     * @isGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function createBand(ManagerRegistry $doctrine, Request $request): Response
     {
@@ -77,7 +78,7 @@ class BandController extends AbstractController
      * @param Band $band
      * @return Response
      * @Route("/bands/delete/{id}", name="band_delete")
-     * @isGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function deleteBand(ManagerRegistry $doctrine, Request $request, Band $band): Response
     {
@@ -96,7 +97,7 @@ class BandController extends AbstractController
      * @param Band $band
      * @return Response
      * @Route("/bands/edit/{id}", name="band_edit")
-     * @isGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function editBand(ManagerRegistry $doctrine, Request $request, Band $band): Response
     {

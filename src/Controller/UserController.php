@@ -25,9 +25,11 @@ class UserController extends AbstractController
 
     /**
      * Modifier un utilisateur
+     *
      * @param ManagerRegistry $doctrine
      * @param Request $request
      * @param User $user
+     * @return Response
      * @Route("/users/edit/{id}", name="user_edit")
      */
     public function editUser(ManagerRegistry $doctrine, Request $request, User $user): Response
